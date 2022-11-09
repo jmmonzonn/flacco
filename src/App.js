@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import "./App.css";
+import Header from "./components/Header";
+import Navbar from "./components/Navbar";
+import Albums from "./pages/Albums";
+import Artists from "./pages/Artists";
+import Songs from "./pages/Songs";
+import Artist from "./pages/Artist";
+import Footer from "./components/Footer";
+import injectContext from "./store/appContext";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter basename="/">
+      <Header />
+      <Navbar />
+      <Switch>
+        <Route exact path="/artists">
+          <Artists />
+        </Route>
+        <Route exact path="/albums">
+          <Albums />
+        </Route>
+        <Route exact path="/songs">
+          <Songs />
+        </Route>
+        <Route exact path="/artist/:artist">
+          <Artist />
+        </Route>
+      </Switch>
+      <Footer />
+    </BrowserRouter>
   );
-}
+};
 
-export default App;
+export default injectContext(App);
